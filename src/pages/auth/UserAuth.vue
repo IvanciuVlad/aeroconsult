@@ -6,18 +6,91 @@
     <base-dialog :show="isLoading" title="Authenticating..." fixed>
       <base-spinner></base-spinner>
     </base-dialog>
-    <base-card>
+
+    <!-- Login form -->
+    <base-card v-if="mode === 'login'">
+      <form @submit.prevent="submitForm">
+        <div class="form-control">
+          <label for="emailLogin">E-Mail</label>
+          <input type="email" id="emailLogin" v-model.trim="emailLogin"/>
+          <p v-if="validity.emailLogin === false">Please enter a valid email</p>
+        </div>
+
+        <div class="form-control">
+          <label for="passwordLogin">Password</label>
+          <input type="password" id="passwordLogin" v-model.trim="passwordLogin"/>
+          <p v-if="validity.passwordLogin === false">Please enter a valid password with at least 6 characters</p>
+        </div>
+
+        <base-button>Login</base-button>
+        <base-button type="button" mode="flat" @click="switchAuthMode">{{ switchModeButtonCaption }}</base-button>
+      </form>
+    </base-card>
+
+    <!-- Signup form -->
+    <base-card v-if="mode === 'signup'">
       <form @submit.prevent="submitForm">
         <div class="form-control">
           <label for="email">E-Mail</label>
-          <input type="email" id="email" v-model.trim="email" />
+          <input type="email" id="email" v-model.trim="email"/>
+          <p v-if="validity.email === false">Please enter a valid email</p>
         </div>
+
+        <div class="form-control">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" v-model.trim="firstName"/>
+          <p v-if="validity.firstName === false">Please enter a valid name</p>
+        </div>
+
+        <div class="form-control">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" v-model.trim="lastName"/>
+          <p v-if="validity.lastName === false">Please enter a valid name</p>
+        </div>
+
+        <div class="form-control">
+          <label for="faculty">Faculty</label>
+          <input type="text" id="faculty" v-model.trim="faculty"/>
+          <p v-if="validity.faculty === false">Please enter a valid name</p>
+        </div>
+
+        <div class="form-control">
+          <label for="studyYear">Study year</label>
+          <select id="studyYear" name="studyYear" v-model="studyYear">
+            <option value="Anul 1">Anul 1</option>
+            <option value="Anul 2">Anul 2</option>
+            <option value="Anul 3">Anul 3</option>
+            <option value="Anul 4">Anul 4</option>
+            <option value="Master 1">Master 1</option>
+            <option value="Master 2">Master 2</option>
+          </select>
+          <p v-if="validity.studyYear === false">Please select your year of study</p>
+        </div>
+
         <div class="form-control">
           <label for="password">Password</label>
-          <input type="password" id="password" v-model.trim="password" />
+          <input type="password" id="password" v-model.trim="password"/>
+          <p v-if="validity.password === false">Please enter a valid password with at least 6 characters</p>
         </div>
-        <p v-if="!formIsValid">Please enter a valid email and password (must be at least 6 characters long).</p>
-        <base-button>{{ submitButtonCaption }}</base-button>
+
+        <div class="form-control">
+          <label for="passwordConfirm">Password confirmation</label>
+          <input type="password" id="passwordConfirm" v-model.trim="passwordConfirm"/>
+          <p v-if="validity.passwordMatch === false">Passwords do not match</p>
+        </div>
+
+        <div class="form-control">
+          <label for="fileUpload">Upload your CV</label>
+          <input type="file" id="fileUpload" ref="file" v-on:change="handleFileUpload()" />
+        </div>
+
+        <div class="form-control">
+          <input type="checkbox" id="confirm-terms" name="confirm-terms" v-model="confirm"/>
+          <label for="confirm-terms">Agree to terms of use?</label>
+          <p v-if="validity.confirm === false">Must agree to continue</p>
+        </div>
+
+        <base-button>Register</base-button>
         <base-button type="button" mode="flat" @click="switchAuthMode">{{ switchModeButtonCaption }}</base-button>
       </form>
     </base-card>
@@ -28,25 +101,39 @@
 export default {
   data() {
     return {
+      emailLogin: '',
+      passwordLogin: '',
       email: '',
+      firstName: '',
+      lastName: '',
+      faculty: '',
+      studyYear: '',
       password: '',
+      passwordConfirm: '',
       formIsValid: true,
       mode: 'login',
       isLoading: false,
       error: null,
+      confirm: false,
+      validity: {
+        emailLogin: true,
+        passwordLogin: true,
+        email: true,
+        firstName: true,
+        lastName: true,
+        faculty: true,
+        studyYear: true,
+        password: true,
+        passwordMatch: true,
+        confirm: true
+      },
+      file: ''
     };
   },
   computed: {
-    submitButtonCaption() {
-      if (this.mode === 'login') {
-        return 'Login';
-      } else {
-        return 'Signup';
-      }
-    },
     switchModeButtonCaption() {
       if (this.mode === 'login') {
-        return 'Signup instead';
+        return 'Register instead';
       } else {
         return 'Login instead';
       }
@@ -55,36 +142,124 @@ export default {
   methods: {
     async submitForm() {
       this.formIsValid = true;
-      if (
-          this.email === '' ||
-          !this.email.includes('@') ||
-          this.password.length < 6
-      ) {
-        this.formIsValid = false;
-        return;
+      this.validity.emailLogin = true;
+      this.validity.paswordLogin = true;
+      this.validity.email = true;
+      this.validity.firstName = true;
+      this.validity.lastName = true;
+      this.validity.faculty = true;
+      this.validity.studyYear = true;
+      this.validity.password = true;
+      this.validity.passwordMatch = true;
+      this.validity.confirm = true;
+
+      if (this.mode === 'signup') {
+        if (this.email === '' || !this.email.includes('@')) {
+          this.formIsValid = false;
+          this.validity.email = false;
+          return;
+        }
+
+        if (this.firstName === '') {
+          this.formIsValid = false;
+          this.validity.firstName = false;
+          return;
+        }
+
+        if (this.lastName === '') {
+          this.formIsValid = false;
+          this.validity.lastName = false;
+          return;
+        }
+
+        if (this.faculty === '') {
+          this.formIsValid = false;
+          this.validity.faculty = false;
+          return;
+        }
+
+        if (this.studyYear === '') {
+          this.formIsValid = false;
+          this.validity.studyYear = false;
+          return;
+        }
+
+        if (this.password.length < 6) {
+          this.formIsValid = false;
+          this.validity.password = false;
+          return;
+        }
+
+        if (this.password !== this.passwordConfirm) {
+          this.formIsValid = false;
+          this.validity.passwordMatch = false;
+          return;
+        }
+
+        if (this.confirm === false) {
+          this.formIsValid = false;
+          this.validity.confirm = false;
+          return;
+        }
+
+        
+      } else {
+        if (this.emailLogin === '' || !this.emailLogin.includes('@')) {
+          this.formIsValid = false;
+          this.validity.emailLogin = false;
+          return;
+        }
+
+        if (this.passwordLogin.length < 6) {
+          this.formIsValid = false;
+          this.validity.passwordLogin = false;
+          return;
+        }
       }
 
       this.isLoading = true;
 
-      const actionPayload = {
+      const loginActionPayload = {
+        email: this.emailLogin,
+        password: this.passwordLogin,
+      };
+
+      const signupActionPayload = {
         email: this.email,
         password: this.password,
       };
 
+      const signupUserDataPayload = {
+        lastName: this.lastName,
+        firstName: this.firstName,
+        studyYear: this.studyYear,
+        faculty: this.studyYear
+      };
+
+      const signupUserCV = {
+        file: this.file
+      }
+
       try {
         if (this.mode === 'login') {
-          await this.$store.dispatch('login', actionPayload);
+          console.log(loginActionPayload);
+          await this.$store.dispatch('login', loginActionPayload);
         } else {
-          await this.$store.dispatch('signup', actionPayload);
+          console.log(signupActionPayload);
+          await this.$store.dispatch('signup', signupActionPayload);
+          await this.$store.dispatch('registerUserData', signupUserDataPayload);
+          await this.$store.dispatch('uploadCV', signupUserCV);
         }
-        const redirectUrl = '/' + (this.$route.query.redirect || 'coaches');
-        this.$router.replace(redirectUrl);
+
+        const redirectUrl = '/';
+        await this.$router.replace(redirectUrl);
       } catch (err) {
         this.error = err.message || 'Failed to authenticate, try later.';
       }
 
       this.isLoading = false;
     },
+
     switchAuthMode() {
       if (this.mode === 'login') {
         this.mode = 'signup';
@@ -95,18 +270,34 @@ export default {
     handleError() {
       this.error = null;
     },
+
+    handleFileUpload() {
+      this.file = this.$refs.file.files[0];
+    }
   },
 };
 </script>
 
 <style scoped>
 form {
-  margin: 1rem;
-  padding: 1rem;
+  margin: 2rem auto;
+  max-width: 40rem;
+  border-radius: 12px;
+
+  padding: 2rem;
+  background-color: #ffffff;
 }
 
 .form-control {
   margin: 0.5rem 0;
+}
+
+.form-control.invalid input {
+  border-color: red;
+}
+
+.form-control.invalid label {
+  color: red;
 }
 
 label {
@@ -116,12 +307,14 @@ label {
 }
 
 input,
-textarea {
+textarea,
+select {
   display: block;
   width: 100%;
   font: inherit;
   border: 1px solid #ccc;
   padding: 0.15rem;
+  margin-top: 0.05rem;
 }
 
 input:focus,
@@ -129,5 +322,37 @@ textarea:focus {
   border-color: #3d008d;
   background-color: #faf6ff;
   outline: none;
+}
+
+button {
+  font: inherit;
+  border: 1px solid #0076bb;
+  background-color: #0076bb;
+  color: white;
+  cursor: pointer;
+  padding: 0.75rem 2rem;
+  border-radius: 30px;
+}
+
+button:hover,
+button:active {
+  border-color: #002350;
+  background-color: #002350;
+}
+
+select {
+  width: auto;
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+  display: inline-block;
+  width: auto;
+  margin-right: 1rem;
+}
+
+input[type='checkbox'] + label,
+input[type='radio'] + label {
+  font-weight: normal;
 }
 </style>

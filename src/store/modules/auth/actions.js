@@ -7,18 +7,23 @@ export default {
             mode: 'login'
         });
     },
+
     async signup(context, payload) {
         return context.dispatch('auth', {
             ...payload,
             mode: 'signup'
         });
     },
+
     async auth(context, payload) {
+        // const API_KEY = process.env["FIREBASE_KEY"];
+        const API_KEY = "AIzaSyAhVIGb0XSgHuEAEMJnINnDjUIBsxVe5_E";
+        console.log(API_KEY);
         const mode = payload.mode;
-        let url = '';
+        let url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
 
         if (mode === 'signup') {
-            url = '';
+            url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
         }
         const response = await fetch(url, {
             method: 'POST',
@@ -54,6 +59,37 @@ export default {
             userId: responseData.localId
         });
     },
+
+    async registerUserData(context, payload) {
+        const userId = context.rootGetters.userId;
+        const userData = {
+            firstName: payload.firstName,
+            lastName: payload.lastName,
+            faculty: payload.faculty,
+            studyYear: payload.studyYear,
+        }
+
+        const token = context.rootGetters.token;
+
+        const response = await fetch(
+            `https://aeroconsult2021-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}.json?auth=` +
+            token,
+            {
+                method: 'PUT',
+                body: JSON.stringify(userData)
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error('Failed to authenticate. Check your login data.');
+        }
+    },
+
+    async uploadCV(context, payload) {
+
+    },
+
+
     tryLogin(context) {
         const token = localStorage.getItem('token');
         const userId = localStorage.getItem('userId');
@@ -93,3 +129,66 @@ export default {
         context.commit('setAutoLogout');
     }
 };
+
+/*    async login(context, payload) {
+        const API_KEY = process.env["FIREBASE_KEY "];
+        const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
+        const response = await fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({
+                email: payload.email,
+                password: payload.password,
+                returnSecureToken: true
+            })
+        });
+
+        const responseData = await response.json();
+
+        if (!response.ok) {
+            console.log(responseData);
+            throw new Error(responseData.message || 'Failed to authenticate. Check your login data.');
+        }
+
+        const expiresIn = +responseData.expiresIn * 1000;
+        // const expiresIn = 5000;
+        const expirationDate = new Date().getTime() + expiresIn;
+
+        localStorage.setItem('token', responseData.idToken);
+        localStorage.setItem('userId', responseData.localId);
+        localStorage.setItem('tokenExpiration', expirationDate);
+
+        timer = setTimeout(function () {
+            context.dispatch('autoLogout');
+        }, expiresIn);
+
+        context.commit('setUser', {
+            token: responseData.idToken,
+            userId: responseData.localId
+        });
+    },
+    async signup(context, payload) {
+        const API_KEY = process.env["FIREBASE_KEY "];
+        const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
+        const response = await fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({
+                email: payload.email,
+                password: payload.password,
+                returnSecureToken: true
+            })
+        });
+
+        const responseData = await response.json();
+
+        if (!response.ok) {
+            console.log(responseData);
+            throw new Error(responseData.message || 'Failed to authenticate. Check your login data.');
+        }
+
+        console.log(responseData);
+        context.commit('setUser', {
+            token: responseData.idToken,
+            userId: responseData.localId,
+            tokenExpiration: responseData.expiresIn
+        });
+    },*/
