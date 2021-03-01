@@ -81,7 +81,8 @@
 
         <div class="form-control">
           <label for="fileUpload">Upload your CV</label>
-          <input type="file" id="fileUpload" ref="file" v-on:change="handleFileUpload()" />
+          <input type="file" id="fileUpload" ref="fileInput" v-on:change="handleFileUpload" accept=".pdf"/>
+          <p v-if="validity.file === false">CV must be uploaded in PDF format</p>
         </div>
 
         <div class="form-control">
@@ -125,9 +126,10 @@ export default {
         studyYear: true,
         password: true,
         passwordMatch: true,
-        confirm: true
+        confirm: true,
+        file: true
       },
-      file: ''
+      file: null
     };
   },
   computed: {
@@ -152,6 +154,7 @@ export default {
       this.validity.password = true;
       this.validity.passwordMatch = true;
       this.validity.confirm = true;
+      this.validity.file = true;
 
       if (this.mode === 'signup') {
         if (this.email === '' || !this.email.includes('@')) {
@@ -202,7 +205,12 @@ export default {
           return;
         }
 
-        
+        if (this.file === null) {
+          this.formIsValid = false;
+          this.validity.file = false;
+          return;
+        }
+
       } else {
         if (this.emailLogin === '' || !this.emailLogin.includes('@')) {
           this.formIsValid = false;
@@ -272,7 +280,21 @@ export default {
     },
 
     handleFileUpload() {
-      this.file = this.$refs.file.files[0];
+      this.file = this.$refs.fileInput.files[0];
+      console.log(this.file);
+/*      const files = event.target.files;
+      let filename = files[0].filename;
+      console.log(filename);
+/!*      if(filename.lastIndexOf('.') <= 0) {
+        return alert("Please add a valid file!")
+      }*!/
+
+      const fileReader = new FileReader();
+      fileReader.addEventListener('load', () => {
+        this.file = fileReader.result;
+        console.log(this.file);
+      })
+      fileReader.readAsDataURL(files[0]);*/
     }
   },
 };

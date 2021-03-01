@@ -1,3 +1,5 @@
+import firebase from "firebase";
+
 let timer;
 
 export default {
@@ -86,7 +88,22 @@ export default {
     },
 
     async uploadCV(context, payload) {
+/*        // Create a root reference
+        const storageRef = firebase.storage().ref();
 
+        // Create a reference to 'CV/{userId}.pdf'
+        const CVFolderRef = storageRef.child(`CV/${payload.file}`);
+
+        // 'file' comes from the Blob or File API
+        CVFolderRefref.put(file).then((snapshot) => {
+            console.log('Uploaded a blob or file!');
+        });*/
+
+        const userId = context.rootGetters.userId;
+
+        //const filename = payload.file.name;
+        //const ext = filename.slice(filename.lastIndexOf('.'))
+        firebase.storage().ref('CV/' + userId + '.pdf').put(payload.file)
     },
 
 
@@ -129,66 +146,3 @@ export default {
         context.commit('setAutoLogout');
     }
 };
-
-/*    async login(context, payload) {
-        const API_KEY = process.env["FIREBASE_KEY "];
-        const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
-        const response = await fetch(url, {
-            method: 'POST',
-            body: JSON.stringify({
-                email: payload.email,
-                password: payload.password,
-                returnSecureToken: true
-            })
-        });
-
-        const responseData = await response.json();
-
-        if (!response.ok) {
-            console.log(responseData);
-            throw new Error(responseData.message || 'Failed to authenticate. Check your login data.');
-        }
-
-        const expiresIn = +responseData.expiresIn * 1000;
-        // const expiresIn = 5000;
-        const expirationDate = new Date().getTime() + expiresIn;
-
-        localStorage.setItem('token', responseData.idToken);
-        localStorage.setItem('userId', responseData.localId);
-        localStorage.setItem('tokenExpiration', expirationDate);
-
-        timer = setTimeout(function () {
-            context.dispatch('autoLogout');
-        }, expiresIn);
-
-        context.commit('setUser', {
-            token: responseData.idToken,
-            userId: responseData.localId
-        });
-    },
-    async signup(context, payload) {
-        const API_KEY = process.env["FIREBASE_KEY "];
-        const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
-        const response = await fetch(url, {
-            method: 'POST',
-            body: JSON.stringify({
-                email: payload.email,
-                password: payload.password,
-                returnSecureToken: true
-            })
-        });
-
-        const responseData = await response.json();
-
-        if (!response.ok) {
-            console.log(responseData);
-            throw new Error(responseData.message || 'Failed to authenticate. Check your login data.');
-        }
-
-        console.log(responseData);
-        context.commit('setUser', {
-            token: responseData.idToken,
-            userId: responseData.localId,
-            tokenExpiration: responseData.expiresIn
-        });
-    },*/
