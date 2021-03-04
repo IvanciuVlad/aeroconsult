@@ -18,8 +18,7 @@ export default {
     },
 
     async auth(context, payload) {
-        // const API_KEY = process.env["FIREBASE_KEY"];
-        const API_KEY = "AIzaSyAhVIGb0XSgHuEAEMJnINnDjUIBsxVe5_E";
+        const API_KEY = process.env.FIREBASE_KEY;
         console.log(API_KEY);
         const mode = payload.mode;
         let url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;

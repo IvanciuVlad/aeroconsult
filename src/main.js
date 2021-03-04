@@ -22,11 +22,11 @@ app.use(store);
 app.use(PrimeVue, {ripple: true});
 
 const config = {
-    apiKey: "AIzaSyAhVIGb0XSgHuEAEMJnINnDjUIBsxVe5_E",
-    authDomain: "aeroconsult2021.firebaseapp.com",
-    databaseURL: "https://aeroconsult2021-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "aeroconsult2021",
-    storageBucket: "gs://aeroconsult2021.appspot.com"
+    apiKey: process.env.FIREBASE_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    databaseURL: process.env.DATABASE_URL,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET
 };
 app.use(firebase.initializeApp(config));
 
