@@ -1,9 +1,5 @@
 import {createApp} from 'vue';
 import App from './App.vue';
-import "primevue/resources/themes/saga-blue/theme.css";
-import "primevue/resources/primevue.min.css";
-import PrimeVue from 'primevue/config';
-import "primeflex/primeflex.css";
 import router from './router.js';
 import store from './store/index.js';
 
@@ -19,14 +15,13 @@ const app = createApp(App);
 
 app.use(router);
 app.use(store);
-app.use(PrimeVue, {ripple: true});
 
 const config = {
-    apiKey: process.env.FIREBASE_KEY,
-    authDomain: process.env.AUTH_DOMAIN,
-    databaseURL: process.env.DATABASE_URL,
-    projectId: process.env.PROJECT_ID,
-    storageBucket: process.env.STORAGE_BUCKET
+    apiKey: process.env.VUE_APP_FIREBASE_KEY,
+    authDomain: process.env.VUE_APP_AUTH_DOMAIN,
+    databaseURL: process.env.VUE_APP_DATABASE_URL,
+    projectId: process.env.VUE_APP_PROJECT_ID,
+    storageBucket: process.env.VUE_APP_STORAGE_BUCKET
 };
 app.use(firebase.initializeApp(config));
 

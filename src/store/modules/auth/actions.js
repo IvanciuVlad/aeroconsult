@@ -18,7 +18,7 @@ export default {
     },
 
     async auth(context, payload) {
-        const API_KEY = process.env.FIREBASE_KEY;
+        const API_KEY = process.env.VUE_APP_FIREBASE_KEY;
         console.log(API_KEY);
         const mode = payload.mode;
         let url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
@@ -44,7 +44,6 @@ export default {
         }
 
         const expiresIn = +responseData.expiresIn * 1000;
-        // const expiresIn = 5000;
         const expirationDate = new Date().getTime() + expiresIn;
 
         localStorage.setItem('token', responseData.idToken);
@@ -87,24 +86,10 @@ export default {
     },
 
     async uploadCV(context, payload) {
-/*        // Create a root reference
-        const storageRef = firebase.storage().ref();
-
-        // Create a reference to 'CV/{userId}.pdf'
-        const CVFolderRef = storageRef.child(`CV/${payload.file}`);
-
-        // 'file' comes from the Blob or File API
-        CVFolderRefref.put(file).then((snapshot) => {
-            console.log('Uploaded a blob or file!');
-        });*/
-
         const userId = context.rootGetters.userId;
 
-        //const filename = payload.file.name;
-        //const ext = filename.slice(filename.lastIndexOf('.'))
         firebase.storage().ref('CV/' + userId + '.pdf').put(payload.file)
     },
-
 
     tryLogin(context) {
         const token = localStorage.getItem('token');
@@ -128,6 +113,7 @@ export default {
             });
         }
     },
+
     logout(context) {
         localStorage.removeItem('token');
         localStorage.removeItem('userId');
@@ -140,6 +126,7 @@ export default {
             userId: null
         });
     },
+
     autoLogout(context) {
         context.dispatch('logout');
         context.commit('setAutoLogout');
