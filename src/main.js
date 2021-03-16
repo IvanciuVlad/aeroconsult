@@ -3,11 +3,18 @@ import App from './App.vue';
 import router from './router.js';
 import store from './store/index.js';
 
+
 import BaseCard from './components/UI/BaseCard.vue';
 import BaseButton from './components/UI/BaseButton.vue';
 import BaseBadge from './components/UI/BaseBadge.vue';
 import BaseSpinner from './components/UI/BaseSpinner.vue';
 import BaseDialog from './components/UI/BaseDialog.vue';
+
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import '@/css/shards.min.css';
+import '@/css/shards-extras.min.css';
 
 import firebase from "firebase";
 

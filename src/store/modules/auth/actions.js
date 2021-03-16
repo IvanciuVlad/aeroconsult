@@ -19,7 +19,7 @@ export default {
 
     async auth(context, payload) {
         const API_KEY = process.env.VUE_APP_FIREBASE_KEY;
-        console.log(API_KEY);
+
         const mode = payload.mode;
         let url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
 
@@ -89,6 +89,31 @@ export default {
         const userId = context.rootGetters.userId;
 
         firebase.storage().ref('CV/' + userId + '.pdf').put(payload.file)
+    },
+
+    async sendContactForm(context, payload) {
+        const date = new Date();
+        const currentDate = String(date.getDate()) + String(date.getMonth()) + String(date.getHours()) + String(date.getMinutes()) + String(date.getSeconds());
+
+        const contactData = {
+            name: payload.name,
+            email: payload.email,
+            message: payload.message
+        };
+
+        console.log(contactData);
+
+        const response = await fetch(
+            `https://aeroconsult2021-default-rtdb.europe-west1.firebasedatabase.app/contact/${currentDate}.json`,
+            {
+                method: 'PUT',
+                body: JSON.stringify(contactData)
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error('Failed to send contact form.');
+        }
     },
 
     tryLogin(context) {

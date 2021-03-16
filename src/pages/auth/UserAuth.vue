@@ -275,6 +275,7 @@ export default {
         this.mode = 'login';
       }
     },
+
     handleError() {
       this.error = null;
     },
@@ -282,19 +283,6 @@ export default {
     handleFileUpload() {
       this.file = this.$refs.fileInput.files[0];
       console.log(this.file);
-/*      const files = event.target.files;
-      let filename = files[0].filename;
-      console.log(filename);
-/!*      if(filename.lastIndexOf('.') <= 0) {
-        return alert("Please add a valid file!")
-      }*!/
-
-      const fileReader = new FileReader();
-      fileReader.addEventListener('load', () => {
-        this.file = fileReader.result;
-        console.log(this.file);
-      })
-      fileReader.readAsDataURL(files[0]);*/
     }
   },
 };
