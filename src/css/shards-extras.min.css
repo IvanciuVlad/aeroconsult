@@ -72,7 +72,7 @@
     position: relative;
     height: 100vh;
     min-height: 700px;
-    /*background: url(../images/chun-186468-unsplash.jpg) no-repeat center center fixed;*/
+
     background-size: cover
 }
 
@@ -168,7 +168,7 @@
 }
 
 .shards-app-promo-page--1 .app-screenshot {
-    background: url(../images/chun-186468-unsplash.jpg) no-repeat center center fixed;
+    background: url(../assets/chun-186468-unsplash.jpg) no-repeat center center fixed;
     background-size: cover
 }
 

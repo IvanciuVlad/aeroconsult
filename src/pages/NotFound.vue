@@ -1,18 +1,15 @@
 <template>
-  <div class="layout-content">
-    <div class="content-section implementation">
-      <base-card style="width: 25rem; margin-bottom: 2em">
-        <template #title>
-          <h2>404-Not Found</h2>
-        </template>
-      </base-card>
+  <div class="container">
+    <div class="card">
+      <h5 class="card-header">404 - Not Found </h5>
+      <div class="card-body">
+        Ai ajuns unde nu trebuia
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import BaseCard from "@/components/UI/BaseCard";
 export default {
-  components: {BaseCard}
 }
 </script>

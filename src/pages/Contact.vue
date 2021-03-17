@@ -1,42 +1,53 @@
 <template>
   <div>
-    <base-dialog :show="!!error" title="An error occurred" @close="handleError">
-      <p>{{ error }}</p>
-    </base-dialog>
+    <the-header></the-header>
 
-    <base-card>
-      <form @submit.prevent="submitForm">
-        <div class="form-control">
-          <label for="name">Name</label>
-          <input type="text" id="name" v-model.trim="name" placeholder="Your Name" />
-          <p v-if="validity.name === false">Please write your name</p>
-        </div>
+    <div class="container">
+      <div class="jumbotron">
+        <base-dialog :show="!!error" title="An error occurred" @close="handleError">
+          <p>{{ error }}</p>
+        </base-dialog>
 
-        <div class="form-control">
-          <label for="email">E-Mail</label>
-          <input type="email" id="email" v-model.trim="email" placeholder="Your Email" />
-          <p v-if="validity.email === false">Please enter a valid email</p>
-        </div>
+        <h4>Trimite-ne un mesaj</h4>
+        <form @submit.prevent="submitForm">
+          <div class="form-group">
+            <label for="name">Numele complet</label>
+            <input type="text" class="form-control" id="name" v-model.trim="name" placeholder="Numele tău"/>
+            <div class="alert alert-danger" role="alert" v-if="validity.name === false">
+              Introduceți numele
+            </div>
+          </div>
 
-        <div class="form-control">
-          <label for="message">Message</label>
-          <textarea rows="5" id="message" v-model.trim="message" placeholder="Message" />
-          <p v-if="validity.message === false">Don't forget your message</p>
-        </div>
+          <div class="form-group">
+            <label for="email">Adresă Email</label>
+            <input type="email" class="form-control" id="email" v-model.trim="email" placeholder="Adresa ta de mail"/>
+            <p v-if="validity.email === false">Adresa de e-mail</p>
+            <div class="alert alert-danger" role="alert" v-if="validity.email === false">
+              Introduce o adresă validă de mail
+            </div>
+          </div>
 
-        <base-button>Send</base-button>
+          <div class="form-group">
+            <label for="message">Mesaj</label>
+            <textarea rows="5" class="form-control" id="message" v-model.trim="message" placeholder="Introduceți mesajul ..."/>
+            <div class="alert alert-danger" role="alert" v-if="validity.message === false">
+              Nu îți uita mesajul
+            </div>
+          </div>
 
-        <span v-if="formIsSubmitted" class="sent-message">We will try to get back to you as soon as possible</span>
-      </form>
-
-
-    </base-card>
+          <button type="submit" class="btn btn-primary">Trimite</button>
+        </form>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 
+import TheHeader from "@/components/layout/TheHeader";
+
 export default {
+  components: {TheHeader},
   data() {
     return {
       email: '',
@@ -72,7 +83,7 @@ export default {
         return;
       }
 
-      if(this.message === '') {
+      if (this.message === '') {
         this.formIsValid = false;
         this.validity.message = false;
         return;
@@ -106,7 +117,7 @@ export default {
 </script>
 
 <style scoped>
-form {
+/*form {
   margin: 2rem auto;
   max-width: 40rem;
   border-radius: 12px;
@@ -186,5 +197,5 @@ input[type='radio'] {
 input[type='checkbox'] + label,
 input[type='radio'] + label {
   font-weight: normal;
-}
+}*/
 </style>

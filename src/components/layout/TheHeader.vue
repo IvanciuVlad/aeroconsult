@@ -1,24 +1,57 @@
 <template>
-  <header>
-    <nav>
-      <h1>
-        <router-link to="/">Aeroconsult</router-link>
-      </h1>
-      <ul>
-        <li v-if="isLoggedIn">
-          <router-link to="apps">Your applications</router-link>
-        </li>
 
-        <li v-else>
-          <router-link to="/auth">Login</router-link>
-        </li>
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-db pt-4 px-0">
+    <div class="container">
+      <router-link to="/" class="navbar-brand mx-auto">
+        <img src="src/assets/sigla2.png" class="mr-2" alt="AEROCONSULT" width="150px;">
+      </router-link>
 
-        <li v-if="isLoggedIn">
-          <base-button @click="logout">Logout</base-button>
-        </li>
-      </ul>
-    </nav>
-  </header>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+              aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+
+          <li class="nav-item active">
+            <router-link to="/home" class="nav-link">
+              Acasă
+            </router-link>
+          </li>
+
+          <li class="nav-item">
+            <router-link to="/contact" class="nav-link">
+              Contactează-ne
+            </router-link>
+          </li>
+
+          <li class="nav-item">
+            <router-link to="/conference" class="nav-link">
+              Conferința live
+            </router-link>
+          </li>
+
+          <li class="nav-item" v-if="isLoggedIn">
+            <router-link to="/apps" class="nav-link">
+              Aplicațile mele
+            </router-link>
+          </li>
+
+          <li class="nav-item" v-else>
+            <router-link class="nav-link" to="/auth">
+              Login
+            </router-link>
+          </li>
+
+          <li class="nav-item" v-if="isLoggedIn" @click="logout">
+            <a class="nav-link">Logout</a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </nav>
 </template>
 
 <script>
@@ -37,7 +70,11 @@ export default {
 </script>
 
 <style scoped>
-header {
+.navbar-db {
+  background: #081123;
+}
+
+/*header {
   width: 100%;
   height: 5rem;
   background-color: #3d008d;
@@ -94,5 +131,5 @@ header ul {
 
 li {
   margin: 0 0.5rem;
-}
+}*/
 </style>

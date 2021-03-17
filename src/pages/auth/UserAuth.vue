@@ -1,105 +1,140 @@
 <template>
   <div>
-    <base-dialog :show="!!error" title="An error occurred" @close="handleError">
-      <p>{{ error }}</p>
-    </base-dialog>
-    <base-dialog :show="isLoading" title="Authenticating..." fixed>
-      <base-spinner></base-spinner>
-    </base-dialog>
+    <the-header></the-header>
 
-    <!-- Login form -->
-    <base-card v-if="mode === 'login'">
-      <form @submit.prevent="submitForm">
-        <div class="form-control">
-          <label for="emailLogin">E-Mail</label>
-          <input type="email" id="emailLogin" v-model.trim="emailLogin"/>
-          <p v-if="validity.emailLogin === false">Please enter a valid email</p>
+    <div class="container">
+      <div class="jumbotron">
+        <base-dialog :show="!!error" title="An error occurred" @close="handleError">
+          <p>{{ error }}</p>
+        </base-dialog>
+        <base-dialog :show="isLoading" title="Authenticating..." fixed>
+          <base-spinner></base-spinner>
+        </base-dialog>
+
+        <!--Login mode-->
+        <div v-if="mode === 'login'">
+          <form @submit.prevent="submitForm">
+            <div class="form-group">
+              <label for="emailLogin">E-Mail</label>
+              <input type="email" class="form-control" id="emailLogin" v-model.trim="emailLogin"/>
+              <div class="alert alert-danger" role="alert" v-if="validity.emailLogin === false">
+                Please enter a valid email
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="passwordLogin">Password</label>
+              <input type="password" class="form-control" id="passwordLogin" v-model.trim="passwordLogin"/>
+              <div class="alert alert-danger" role="alert" v-if="validity.passwordLogin === false">
+                Please enter a valid password with at least 6 characters
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Login</button>
+            <button class="btn btn-black" @click="switchAuthMode">{{ switchModeButtonCaption }}</button>
+          </form>
         </div>
 
-        <div class="form-control">
-          <label for="passwordLogin">Password</label>
-          <input type="password" id="passwordLogin" v-model.trim="passwordLogin"/>
-          <p v-if="validity.passwordLogin === false">Please enter a valid password with at least 6 characters</p>
+        <!-- Signup mode -->
+        <div v-if="mode === 'signup'">
+          <form @submit.prevent="submitForm">
+            <div class="form-group">
+              <label for="email">E-Mail</label>
+              <input type="email" class="form-control" id="email" v-model.trim="email"/>
+              <div class="alert alert-danger" role="alert" v-if="validity.email === false">
+                Please enter a valid email
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" class="form-control" id="firstName" v-model.trim="firstName"/>
+              <p v-if="validity.firstName === false">Please enter a valid name</p>
+              <div class="alert alert-danger" role="alert" v-if="validity.firstName === false">
+                Please enter a valid name
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" class="form-control" id="lastName" v-model.trim="lastName"/>
+              <div class="alert alert-danger" role="alert" v-if="validity.lastName === false">
+                Please enter a valid name
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="faculty">Faculty</label>
+              <input type="text" class="form-control" id="faculty" v-model.trim="faculty"/>
+              <div class="alert alert-danger" role="alert" v-if="validity.faculty === false">
+                Please enter a valid name
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="studyYear">Study year</label>
+              <select class="form-control" id="studyYear" name="studyYear" v-model="studyYear">
+                <option value="Anul 1">Anul 1</option>
+                <option value="Anul 2">Anul 2</option>
+                <option value="Anul 3">Anul 3</option>
+                <option value="Anul 4">Anul 4</option>
+                <option value="Master 1">Master 1</option>
+                <option value="Master 2">Master 2</option>
+              </select>
+              <div class="alert alert-danger" role="alert" v-if="validity.studyYear === false">
+                Please select your year of study
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" v-model.trim="password"/>
+              <div class="alert alert-danger" role="alert" v-if="validity.password === false">
+                Please enter a valid password with at least 6 characters
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="passwordConfirm">Password confirmation</label>
+              <input type="password" class="form-control" id="passwordConfirm" v-model.trim="passwordConfirm"/>
+              <div class="alert alert-danger" role="alert" v-if="validity.passwordMatch === false">
+                Passwords do not match
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="fileUpload">Upload your CV</label>
+              <input type="file" id="fileUpload" class="form-control-file" ref="fileInput"
+                     v-on:change="handleFileUpload" accept=".pdf"/>
+
+              <div class="alert alert-danger" role="alert" v-if="validity.file === false">
+                CV must be uploaded in PDF format
+              </div>
+            </div>
+
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="confirm-terms" name="confirm-terms" v-model="confirm">
+              <label class="form-check-label" for="confirm-terms">Agree to terms of use?</label>
+              <div class="alert alert-danger" role="alert" v-if="validity.confirm === false">
+                Must agree to continue
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Register</button>
+            <button class="btn btn-black" @click="switchAuthMode">{{ switchModeButtonCaption }}</button>
+          </form>
         </div>
 
-        <base-button>Login</base-button>
-        <base-button type="button" mode="flat" @click="switchAuthMode">{{ switchModeButtonCaption }}</base-button>
-      </form>
-    </base-card>
-
-    <!-- Signup form -->
-    <base-card v-if="mode === 'signup'">
-      <form @submit.prevent="submitForm">
-        <div class="form-control">
-          <label for="email">E-Mail</label>
-          <input type="email" id="email" v-model.trim="email"/>
-          <p v-if="validity.email === false">Please enter a valid email</p>
-        </div>
-
-        <div class="form-control">
-          <label for="firstName">First Name</label>
-          <input type="text" id="firstName" v-model.trim="firstName"/>
-          <p v-if="validity.firstName === false">Please enter a valid name</p>
-        </div>
-
-        <div class="form-control">
-          <label for="lastName">Last Name</label>
-          <input type="text" id="lastName" v-model.trim="lastName"/>
-          <p v-if="validity.lastName === false">Please enter a valid name</p>
-        </div>
-
-        <div class="form-control">
-          <label for="faculty">Faculty</label>
-          <input type="text" id="faculty" v-model.trim="faculty"/>
-          <p v-if="validity.faculty === false">Please enter a valid name</p>
-        </div>
-
-        <div class="form-control">
-          <label for="studyYear">Study year</label>
-          <select id="studyYear" name="studyYear" v-model="studyYear">
-            <option value="Anul 1">Anul 1</option>
-            <option value="Anul 2">Anul 2</option>
-            <option value="Anul 3">Anul 3</option>
-            <option value="Anul 4">Anul 4</option>
-            <option value="Master 1">Master 1</option>
-            <option value="Master 2">Master 2</option>
-          </select>
-          <p v-if="validity.studyYear === false">Please select your year of study</p>
-        </div>
-
-        <div class="form-control">
-          <label for="password">Password</label>
-          <input type="password" id="password" v-model.trim="password"/>
-          <p v-if="validity.password === false">Please enter a valid password with at least 6 characters</p>
-        </div>
-
-        <div class="form-control">
-          <label for="passwordConfirm">Password confirmation</label>
-          <input type="password" id="passwordConfirm" v-model.trim="passwordConfirm"/>
-          <p v-if="validity.passwordMatch === false">Passwords do not match</p>
-        </div>
-
-        <div class="form-control">
-          <label for="fileUpload">Upload your CV</label>
-          <input type="file" id="fileUpload" ref="fileInput" v-on:change="handleFileUpload" accept=".pdf"/>
-          <p v-if="validity.file === false">CV must be uploaded in PDF format</p>
-        </div>
-
-        <div class="form-control">
-          <input type="checkbox" id="confirm-terms" name="confirm-terms" v-model="confirm"/>
-          <label for="confirm-terms">Agree to terms of use?</label>
-          <p v-if="validity.confirm === false">Must agree to continue</p>
-        </div>
-
-        <base-button>Register</base-button>
-        <base-button type="button" mode="flat" @click="switchAuthMode">{{ switchModeButtonCaption }}</base-button>
-      </form>
-    </base-card>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import TheHeader from "@/components/layout/TheHeader";
+
 export default {
+  components: {TheHeader},
   data() {
     return {
       emailLogin: '',
