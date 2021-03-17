@@ -1,5 +1,6 @@
 <template>
-  <div class="shards-app-promo-page&#45;&#45;1">
+  <div>
+    <div class="shards-app-promo-page&#45;&#45;1">
 
       <router-view v-slot="slotProps">
         <transition name="route" mode="out-in">
@@ -7,14 +8,16 @@
         </transition>
       </router-view>
 
-
+    </div>
   </div>
 </template>
 
 <script>
 
-export default {
+import TheFooter from "@/components/layout/TheFooter";
 
+export default {
+  components: {TheFooter}
 }
 
 </script>

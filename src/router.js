@@ -6,6 +6,8 @@ import Home from './pages/Home';
 import store from './store/index.js';
 import Contact from "@/pages/Contact";
 import Conference from "@/pages/Conference";
+import Companies from "@/pages/companies/Companies";
+import Euroavia from "@/pages/companies/individual/Euroavia";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -13,6 +15,8 @@ const router = createRouter({
         { path:'/', component: Home },
         { path: '/contact', component: Contact },
         { path: '/conference', component: Conference },
+        { path: '/companies', component: Companies},
+        { path: '/euroavia', component: Euroavia },
         { path: '/auth', component: UserAuth, meta: { requiresUnauth: true } },
         { path: '/:notFound(.*)', component: NotFound }
     ]

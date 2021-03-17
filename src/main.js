@@ -17,10 +17,24 @@ import '@/css/shards-extras.min.css';
 
 import firebase from "firebase";
 
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faFacebook } from '@fortawesome/free-brands-svg-icons';
+import {faUser, faEnvelope, faUniversity, faIdCard, faKey} from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+
+library.add(faFacebook);
+library.add(faUser);
+library.add(faUniversity);
+library.add(faEnvelope);
+library.add(faIdCard);
+library.add(faKey);
+
 const app = createApp(App);
 
 app.use(router);
 app.use(store);
+
+app.component("fa", FontAwesomeIcon);
 
 const config = {
     apiKey: process.env.VUE_APP_FIREBASE_KEY,

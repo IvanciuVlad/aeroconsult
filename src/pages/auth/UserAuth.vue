@@ -2,8 +2,9 @@
   <div>
     <the-header></the-header>
 
-    <div class="container">
-      <div class="jumbotron">
+    <div class="blog section section-invert py-4 text-white vh-100" style="background: #081123;">
+      <div class="container-md" style="background: whitesmoke; padding: 30px;border-radius:15px">
+
         <base-dialog :show="!!error" title="An error occurred" @close="handleError">
           <p>{{ error }}</p>
         </base-dialog>
@@ -12,67 +13,118 @@
         </base-dialog>
 
         <!--Login mode-->
-        <div v-if="mode === 'login'">
+        <div v-if="mode === 'login'" class="text-black">
           <form @submit.prevent="submitForm">
             <div class="form-group">
-              <label for="emailLogin">E-Mail</label>
-              <input type="email" class="form-control" id="emailLogin" v-model.trim="emailLogin"/>
+              <label for="emailLogin">Adresă Email</label>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <fa :icon="['fas', 'envelope']"/>
+                  </span>
+                </div>
+                <input type="email" class="form-control" id="emailLogin" v-model.trim="emailLogin"
+                       placeholder="Adresa ta de mail"/>
+              </div>
+
               <div class="alert alert-danger" role="alert" v-if="validity.emailLogin === false">
-                Please enter a valid email
+                Introduce adresa de email
               </div>
             </div>
 
             <div class="form-group">
-              <label for="passwordLogin">Password</label>
-              <input type="password" class="form-control" id="passwordLogin" v-model.trim="passwordLogin"/>
+              <label for="passwordLogin">Parolă</label>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <fa :icon="['fas', 'key']"/>
+                  </span>
+                </div>
+                <input type="password" class="form-control" id="passwordLogin" v-model.trim="passwordLogin"/>
+              </div>
               <div class="alert alert-danger" role="alert" v-if="validity.passwordLogin === false">
-                Please enter a valid password with at least 6 characters
+                Nu uita de parola
               </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Login</button>
-            <button class="btn btn-black" @click="switchAuthMode">{{ switchModeButtonCaption }}</button>
+            <button type="submit" class="btn btn-primary active mr-2">Login</button>
+            <button type="button" class="btn btn-secondary" @click="switchAuthMode">{{
+                switchModeButtonCaption
+              }}
+            </button>
           </form>
         </div>
 
         <!-- Signup mode -->
-        <div v-if="mode === 'signup'">
+        <div v-if="mode === 'signup'" class="text-black">
           <form @submit.prevent="submitForm">
             <div class="form-group">
-              <label for="email">E-Mail</label>
-              <input type="email" class="form-control" id="email" v-model.trim="email"/>
+              <label for="email">Adresă Email</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+              <span class="input-group-text">
+                <fa :icon="['fas', 'envelope']"/>
+              </span>
+                </div>
+                <input type="email" class="form-control" id="email" v-model.trim="email"
+                       placeholder="Adresa ta de mail"/>
+              </div>
               <div class="alert alert-danger" role="alert" v-if="validity.email === false">
-                Please enter a valid email
+                Introduce o adresă validă de mail
               </div>
             </div>
 
             <div class="form-group">
-              <label for="firstName">First Name</label>
-              <input type="text" class="form-control" id="firstName" v-model.trim="firstName"/>
-              <p v-if="validity.firstName === false">Please enter a valid name</p>
+              <label for="firstName">Prenume</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+              <span class="input-group-text">
+                <fa :icon="['fas', 'user']"/>
+              </span>
+                </div>
+                <input type="text" class="form-control" id="firstName" v-model.trim="firstName"
+                       placeholder="Prenumele tău"/>
+              </div>
               <div class="alert alert-danger" role="alert" v-if="validity.firstName === false">
-                Please enter a valid name
+                Introduceți numele
               </div>
             </div>
 
             <div class="form-group">
-              <label for="lastName">Last Name</label>
-              <input type="text" class="form-control" id="lastName" v-model.trim="lastName"/>
+              <label for="lastName">Nume</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+              <span class="input-group-text">
+                <fa :icon="['fas', 'user']"/>
+              </span>
+                </div>
+                <input type="text" class="form-control" id="lastName" v-model.trim="lastName" placeholder="Numele tău"/>
+              </div>
               <div class="alert alert-danger" role="alert" v-if="validity.lastName === false">
-                Please enter a valid name
+                Introduceți numele
               </div>
             </div>
 
             <div class="form-group">
-              <label for="faculty">Faculty</label>
-              <input type="text" class="form-control" id="faculty" v-model.trim="faculty"/>
+              <label for="faculty">Facultate</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+              <span class="input-group-text">
+                <fa :icon="['fas', 'university']"/>
+              </span>
+                </div>
+                <input type="text" class="form-control" id="faculty" v-model.trim="faculty"
+                       placeholder="Denumirea completă a facultăți"/>
+              </div>
               <div class="alert alert-danger" role="alert" v-if="validity.faculty === false">
-                Please enter a valid name
+                Introduceți numele facultății voastre
               </div>
             </div>
 
             <div class="form-group">
-              <label for="studyYear">Study year</label>
+              <label for="studyYear">Anul de studiu</label>
               <select class="form-control" id="studyYear" name="studyYear" v-model="studyYear">
                 <option value="Anul 1">Anul 1</option>
                 <option value="Anul 2">Anul 2</option>
@@ -82,46 +134,65 @@
                 <option value="Master 2">Master 2</option>
               </select>
               <div class="alert alert-danger" role="alert" v-if="validity.studyYear === false">
-                Please select your year of study
+                Selectează anul de studiu
               </div>
             </div>
 
             <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" class="form-control" id="password" v-model.trim="password"/>
+              <label for="password">Parolă</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <fa :icon="['fas', 'key']"/>
+                  </span>
+                </div>
+                <input type="password" class="form-control" id="password" v-model.trim="password"
+                       placeholder="*********"/>
+              </div>
               <div class="alert alert-danger" role="alert" v-if="validity.password === false">
-                Please enter a valid password with at least 6 characters
+                Introduce o parolă de cel puțin 6 caractere
               </div>
             </div>
 
             <div class="form-group">
-              <label for="passwordConfirm">Password confirmation</label>
-              <input type="password" class="form-control" id="passwordConfirm" v-model.trim="passwordConfirm"/>
+              <label for="passwordConfirm">Confirmare parolă</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <fa :icon="['fas', 'key']"/>
+                  </span>
+                </div>
+                <input type="password" class="form-control" id="passwordConfirm" v-model.trim="passwordConfirm"
+                       placeholder="*********"/>
+              </div>
               <div class="alert alert-danger" role="alert" v-if="validity.passwordMatch === false">
-                Passwords do not match
+                Parolele diferă
               </div>
             </div>
 
             <div class="form-group">
-              <label for="fileUpload">Upload your CV</label>
+              <label for="fileUpload">Încarcă CV-ul</label>
               <input type="file" id="fileUpload" class="form-control-file" ref="fileInput"
                      v-on:change="handleFileUpload" accept=".pdf"/>
 
               <div class="alert alert-danger" role="alert" v-if="validity.file === false">
-                CV must be uploaded in PDF format
+                CV-ul trebuie sa fie în format PDF
               </div>
             </div>
 
             <div class="form-check">
               <input type="checkbox" class="form-check-input" id="confirm-terms" name="confirm-terms" v-model="confirm">
-              <label class="form-check-label" for="confirm-terms">Agree to terms of use?</label>
+              <label class="form-check-label" for="confirm-terms">Accept Termenii şi Condițiile</label>
               <div class="alert alert-danger" role="alert" v-if="validity.confirm === false">
-                Must agree to continue
+                Trebuie să accepți ca să continui
               </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Register</button>
-            <button class="btn btn-black" @click="switchAuthMode">{{ switchModeButtonCaption }}</button>
+            <button type="submit" class="btn btn-primary active mr-2">Înregistrare</button>
+            <button type="button" class="btn btn-secondary" @click="switchAuthMode">{{
+                switchModeButtonCaption
+              }}
+            </button>
           </form>
         </div>
 
@@ -170,9 +241,9 @@ export default {
   computed: {
     switchModeButtonCaption() {
       if (this.mode === 'login') {
-        return 'Register instead';
+        return 'Înregistrare';
       } else {
-        return 'Login instead';
+        return 'Login';
       }
     },
   },
@@ -324,7 +395,7 @@ export default {
 </script>
 
 <style scoped>
-form {
+/*form {
   margin: 2rem auto;
   max-width: 40rem;
   border-radius: 12px;
@@ -399,5 +470,5 @@ input[type='radio'] {
 input[type='checkbox'] + label,
 input[type='radio'] + label {
   font-weight: normal;
-}
+}*/
 </style>

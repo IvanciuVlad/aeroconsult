@@ -2,17 +2,26 @@
   <div>
     <the-header></the-header>
 
-    <div class="container">
-      <div class="jumbotron">
+    <div class="blog section section-invert py-4 text-white vh-100" style="background: #081123;">
+      <div class="container">
+
         <base-dialog :show="!!error" title="An error occurred" @close="handleError">
           <p>{{ error }}</p>
         </base-dialog>
 
-        <h4>Trimite-ne un mesaj</h4>
+        <h4 class="text-white">Trimite-ne un mesaj</h4>
         <form @submit.prevent="submitForm">
+
           <div class="form-group">
             <label for="name">Numele complet</label>
-            <input type="text" class="form-control" id="name" v-model.trim="name" placeholder="Numele tău"/>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+              <span class="input-group-text">
+                <fa :icon="['fas', 'user']"/>
+              </span>
+              </div>
+              <input type="text" class="form-control" id="name" v-model.trim="name" placeholder="Numele tău"/>
+            </div>
             <div class="alert alert-danger" role="alert" v-if="validity.name === false">
               Introduceți numele
             </div>
@@ -20,8 +29,16 @@
 
           <div class="form-group">
             <label for="email">Adresă Email</label>
-            <input type="email" class="form-control" id="email" v-model.trim="email" placeholder="Adresa ta de mail"/>
-            <p v-if="validity.email === false">Adresa de e-mail</p>
+
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+              <span class="input-group-text">
+                <fa :icon="['fas', 'envelope']"/>
+              </span>
+              </div>
+              <input type="email" class="form-control" id="email" v-model.trim="email" placeholder="Adresa ta de mail"/>
+            </div>
+
             <div class="alert alert-danger" role="alert" v-if="validity.email === false">
               Introduce o adresă validă de mail
             </div>
@@ -29,7 +46,8 @@
 
           <div class="form-group">
             <label for="message">Mesaj</label>
-            <textarea rows="5" class="form-control" id="message" v-model.trim="message" placeholder="Introduceți mesajul ..."/>
+            <textarea rows="5" class="form-control" id="message" v-model.trim="message"
+                      placeholder="Introduceți mesajul ..."/>
             <div class="alert alert-danger" role="alert" v-if="validity.message === false">
               Nu îți uita mesajul
             </div>
@@ -37,6 +55,7 @@
 
           <button type="submit" class="btn btn-primary">Trimite</button>
         </form>
+
       </div>
     </div>
   </div>
@@ -59,7 +78,7 @@ export default {
         email: true,
         name: true,
         message: true,
-      }
+      },
     }
   },
 

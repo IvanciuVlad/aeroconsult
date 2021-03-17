@@ -4,7 +4,7 @@
       <nav class="navbar navbar-expand-lg navbar-dark pt-4 px-0">
         <div class="container">
           <router-link to="/" class="navbar-brand mx-auto" >
-            <img src="src/assets/sigla2.png" class="mr-2" alt="AEROCONSULT" width="150px;">
+            <img src="../assets/sigla2.png" class="mr-2 imag-logo" alt="AEROCONSULT">
           </router-link>
 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -16,7 +16,7 @@
             <ul class="navbar-nav">
 
               <li class="nav-item active">
-                <router-link to="/home" class="nav-link">
+                <router-link to="/" class="nav-link">
                   Acasă
                 </router-link>
               </li>
@@ -30,6 +30,12 @@
               <li class="nav-item">
                 <router-link to="/conference" class="nav-link">
                   Conferința live
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link to="/companies" class="nav-link">
+                  Companii participante
                 </router-link>
               </li>
 
@@ -74,7 +80,7 @@
             </h5>
             <a href="https://ro-ro.facebook.com/EUROAVIABucuresti/"
                class="btn btn-lg btn-primary btn-pill align-self-center" target="_blank">
-              <i class="fa fa-facebook" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Găsește-ne pe Facebook
+              <fa :icon="['fab', 'facebook']" />   Găsește-ne pe Facebook
             </a>
           </div>
 
@@ -170,7 +176,7 @@
 
       <div class="container py-5">
         <div class="row">
-          <div class="col-md-4 testimonial text-center">
+          <div class="col-md-6 testimonial text-center">
             <a href="https://euroavia-bucuresti.ro/" target="_blank">
               <div class="avatar rounded-circle with-shadows mb-3 ml-auto mr-auto">
                 <img src="@/assets/logo_targ_wh.png" class="w-100" alt="Testimonial Avatar"/>
@@ -180,18 +186,8 @@
             <span class="text-muted d-block mb-2">The European Assiociation of Aerospace Students</span>
           </div>
 
-          <div class="col-md-4 testimonial text-center">
-            <a href="http://www.aero.pub.ro/wordpress/index.php/ro/acasa/" target="_blank">
-              <div class="avatar rounded-circle with-shadows mb-3 ml-auto mr-auto">
-                <img src="@/assets/Facultatea-de-inginerie-aerospatiala.png" class="w-100"
-                     alt="Testimonial Avatar"/>
-              </div>
-            </a>
-            <h5 class="mb-1">FIA</h5>
-            <span class="text-muted d-block mb-2">Facultatea de Inginerie Aerospațială</span>
-          </div>
 
-          <div class="col-md-4 testimonial text-center">
+          <div class="col-md-6 testimonial text-center">
             <a href="http://www.upb.ro/" target="_blank">
               <div class="avatar rounded-circle with-shadows mb-3 ml-auto mr-auto">
                 <img src="@/assets/logo-upb.png" class="w-100" alt="Testimonial Avatar"/>
@@ -210,9 +206,18 @@
 <script>
 export default {
   name: 'App',
+
   computed: {
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated;
+    },
     didAutoLogout() {
       return this.$store.getters.didAutoLogout;
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout');
     }
   },
   created() {
@@ -229,5 +234,7 @@ export default {
 </script>
 
 <style scoped>
-
+.imag-logo {
+  width: 75px;
+}
 </style>
