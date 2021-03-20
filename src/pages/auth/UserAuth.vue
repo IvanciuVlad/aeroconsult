@@ -356,11 +356,11 @@ export default {
 
       try {
         if (this.mode === 'login') {
-          console.log(loginActionPayload);
+          //console.log(loginActionPayload);
           await this.$store.dispatch('login', loginActionPayload);
           await this.$store.dispatch('loadApplications');
         } else {
-          console.log(signupActionPayload);
+          //console.log(signupActionPayload);
           await this.$store.dispatch('signup', signupActionPayload);
           await this.$store.dispatch('registerUserData', signupUserDataPayload);
           await this.$store.dispatch('uploadCV', signupUserCV);

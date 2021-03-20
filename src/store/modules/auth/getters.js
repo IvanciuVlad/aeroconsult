@@ -5,6 +5,9 @@ export default {
     token(state) {
         return state.token;
     },
+    noOfApps(state) {
+        return state.noOfApps;
+    },
     appliedTo(state) {
       return state.appliedTo;
     },
@@ -14,10 +17,5 @@ export default {
     didAutoLogout(state) {
         return state.didAutoLogout;
     },
-    checkIfApplied(state, payload) {
-        console.log(payload);
-        console.log(state.appliedTo.includes(payload));
-        console.log("Applied to: " + state.appliedTo);
-        return state.appliedTo.includes(payload) === true;
-    }
+
 };

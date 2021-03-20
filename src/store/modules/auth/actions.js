@@ -37,7 +37,7 @@ export default {
             })
         });
 
-        console.log("Am primit response in auth");
+        // console.log("Am primit response in auth");
         const responseData = await response.json();
 
         if (!response.ok) {
@@ -70,11 +70,10 @@ export default {
             lastName: payload.lastName,
             faculty: payload.faculty,
             studyYear: payload.studyYear,
-            appliedTo: {},
             noOfApps: 0
         }
 
-        console.log(userData);
+        // console.log(userData);
 
         const token = context.rootGetters.token;
 
@@ -102,7 +101,7 @@ export default {
             message: payload.message
         };
 
-        console.log(contactData);
+        // console.log(contactData);
 
         const response = await fetch(
             `https://aeroconsult2021-default-rtdb.europe-west1.firebasedatabase.app/contact/${currentDate}.json`,
@@ -123,7 +122,7 @@ export default {
 
         const appliedTo = context.rootGetters.appliedTo;
 
-        console.log(appliedTo);
+        // console.log(appliedTo);
 
         const response = await fetch(
             `https://aeroconsult2021-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/appliedTo.json?auth=` + token,
@@ -137,7 +136,6 @@ export default {
             throw new Error('Failed to send application.');
         }
 
-        // await this.updateNoOfApps(context);
         await context.dispatch('updateNoOfApps');
     },
 
@@ -168,21 +166,23 @@ export default {
         console.log(" in load applications")
         const response = await fetch(`https://aeroconsult2021-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}.json?auth=` + token)
 
-        const responseData = response.json();
-        console.log("avem response data");
+        const responseData = await response.json();
+
 
         if (!response.ok) {
             throw new Error(responseData.message || 'Failed to fetch!');
         }
 
-        const apps = [];
+        // console.log("avem response data cu json " + responseData + " si fara " + response);
+        // console.log(responseData);
+        const apps = responseData.appliedTo;
 
         const noOfApps = responseData.noOfApps;
-        for (let i = 0; i < noOfApps; i++) {
+        /*for (let i = 0; i < noOfApps; i++) {
             apps.push(responseData.appliedTo[i]);
-        }
+        }*/
 
-        console.log("In loadApplication: " + noOfApps + " apps " + apps);
+        // console.log("In loadApplication: " + noOfApps + " apps " + apps);
 
         context.commit('setNoOfApps', noOfApps);
         context.commit('setApplications', apps);
@@ -233,5 +233,5 @@ export default {
     autoLogout(context) {
         context.dispatch('logout');
         context.commit('setAutoLogout');
-    }
+    },
 };

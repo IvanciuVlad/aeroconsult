@@ -114,7 +114,7 @@ export default {
         message: this.message
       }
 
-      console.log(contactActionPayload);
+      // console.log(contactActionPayload);
 
       try {
         await this.$store.dispatch('sendContactForm', contactActionPayload);

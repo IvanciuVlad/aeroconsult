@@ -63,12 +63,13 @@
           </p>
         </div>
 
-        <div class="text-center">
-          <button class="btn btn-success" v-if="!verificationOfApplication" @click="apply">
-            Aplică acum
-          </button>
-          <button class="btn btn-success" disabled v-else>
+        <div class="text-center" v-if="haveAuth">
+          <button class="btn btn-success" disabled v-if="verificationOfApplication">
             Aplicat deja
+          </button>
+
+          <button class="btn btn-success" v-else @click="apply">
+            Aplică acum
           </button>
         </div>
 
@@ -84,9 +85,16 @@ export default {
   components: {TheHeader},
   computed: {
     verificationOfApplication() {
-      const companyPayload = 'eur';
+      const companiesAppliedTo = this.$store.getters.appliedTo;
+      // console.log(companiesAppliedTo, (companiesAppliedTo.valueOf()), companiesAppliedTo.includes('eur'));
+      //console.log(JSON.parse(JSON.stringify(companiesAppliedTo)).flat())
+      const result = (JSON.parse(JSON.stringify(companiesAppliedTo)).flat() || []).includes('eur');
+      //console.log("Ce obtin de la getter in verificare: " +  companiesAppliedTo + " result " + result);
+      return result;
 
-      return this.$store.getters.checkIfApplied[companyPayload];
+    },
+    haveAuth() {
+      return this.$store.getters.isAuthenticated;
     }
   },
   methods: {

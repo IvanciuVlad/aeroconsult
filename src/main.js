@@ -19,7 +19,7 @@ import firebase from "firebase";
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
-import {faUser, faEnvelope, faUniversity, faIdCard, faKey, faDownload} from '@fortawesome/free-solid-svg-icons';
+import { faUser, faEnvelope, faUniversity, faIdCard, faKey, faDownload } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 
 library.add(faFacebook, faDownload, faUser, faUniversity, faEnvelope, faIdCard, faKey, faDownload);

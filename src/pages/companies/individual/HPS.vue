@@ -51,12 +51,13 @@
 
           </p>
 
-          <div class="text-center">
-            <button class="btn btn-success" v-if="!applied" @click="apply">
-              Aplică acum
-            </button>
-            <button class="btn btn-success" disabled v-else>
+          <div class="text-center" v-if="haveAuth">
+            <button class="btn btn-success" disabled v-if="verificationOfApplication">
               Aplicat deja
+            </button>
+
+            <button class="btn btn-success" v-else @click="apply">
+              Aplică acum
             </button>
           </div>
 
@@ -71,20 +72,27 @@ import TheHeader from "@/components/layout/TheHeader";
 
 export default {
   components: {TheHeader},
-  data() {
-    return {
-      applied: false,
+  computed: {
+    verificationOfApplication() {
+      const companiesAppliedTo = this.$store.getters.appliedTo;
+      // console.log(companiesAppliedTo, (companiesAppliedTo.valueOf()), companiesAppliedTo.includes('eur'));
+      //console.log(JSON.parse(JSON.stringify(companiesAppliedTo)).flat())
+      const result = (JSON.parse(JSON.stringify(companiesAppliedTo)).flat() || []).includes('hps');
+      // console.log("Ce obtin de la getter in verificare: " +  companiesAppliedTo + " result " + result);
+      return result;
+
+    },
+    haveAuth() {
+      return this.$store.getters.isAuthenticated;
     }
   },
   methods: {
     async apply() {
-      this.applied = true;
-
       const companyPayload = 'hps';
 
       this.$store.commit('setApplications', companyPayload);
       await this.$store.dispatch('sendApplication');
-    }
+    },
   }
 }
 </script>

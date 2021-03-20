@@ -39,13 +39,7 @@
                 </router-link>
               </li>
 
-              <li class="nav-item" v-if="isLoggedIn">
-                <router-link to="/apps" class="nav-link">
-                  Aplicațile mele
-                </router-link>
-              </li>
-
-              <li class="nav-item" v-else>
+              <li class="nav-item" v-if="!isLoggedIn">
                 <router-link class="nav-link" to="/auth">
                   Login
                 </router-link>
