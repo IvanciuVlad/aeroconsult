@@ -7,7 +7,13 @@ export default {
         return {
             userId: null,
             token: null,
-            didAutoLogout: false
+            didAutoLogout: false,
+            firstName: null,
+            lastName: null,
+            faculty: null,
+            studyYear: null,
+            appliedTo: [],
+            noOfApps: null
         };
     },
     mutations,

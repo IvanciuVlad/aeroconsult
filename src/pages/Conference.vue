@@ -28,18 +28,4 @@ export default {
 </script>
 
 <style scoped>
-/*body > .el-container {
-  margin-bottom: 40px;
-}
-
-.bottom-video-card {
-  margin-top: 13px;
-  font-size: 24px;
-  line-height: 18px;
-  padding: 14px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}*/
 </style>

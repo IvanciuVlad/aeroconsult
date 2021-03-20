@@ -64,7 +64,7 @@
         </div>
 
         <div class="text-center">
-          <button class="btn btn-success" v-if="!applied" @click="apply">
+          <button class="btn btn-success" v-if="!verificationOfApplication" @click="apply">
             Aplică acum
           </button>
           <button class="btn btn-success" disabled v-else>
@@ -82,15 +82,20 @@ import TheHeader from "@/components/layout/TheHeader";
 
 export default {
   components: {TheHeader},
-  data() {
-    return {
-      applied: false,
+  computed: {
+    verificationOfApplication() {
+      const companyPayload = 'eur';
+
+      return this.$store.getters.checkIfApplied[companyPayload];
     }
   },
   methods: {
-    apply() {
-      this.applied = true;
-    }
+    async apply() {
+      const companyPayload = 'eur';
+
+      this.$store.commit('setApplications', companyPayload);
+      await this.$store.dispatch('sendApplication');
+    },
   }
 }
 </script>

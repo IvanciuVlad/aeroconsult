@@ -358,6 +358,7 @@ export default {
         if (this.mode === 'login') {
           console.log(loginActionPayload);
           await this.$store.dispatch('login', loginActionPayload);
+          await this.$store.dispatch('loadApplications');
         } else {
           console.log(signupActionPayload);
           await this.$store.dispatch('signup', signupActionPayload);
@@ -395,80 +396,5 @@ export default {
 </script>
 
 <style scoped>
-/*form {
-  margin: 2rem auto;
-  max-width: 40rem;
-  border-radius: 12px;
 
-  padding: 2rem;
-  background-color: #ffffff;
-}
-
-.form-control {
-  margin: 0.5rem 0;
-}
-
-.form-control.invalid input {
-  border-color: red;
-}
-
-.form-control.invalid label {
-  color: red;
-}
-
-label {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  display: block;
-}
-
-input,
-textarea,
-select {
-  display: block;
-  width: 100%;
-  font: inherit;
-  border: 1px solid #ccc;
-  padding: 0.15rem;
-  margin-top: 0.05rem;
-}
-
-input:focus,
-textarea:focus {
-  border-color: #3d008d;
-  background-color: #faf6ff;
-  outline: none;
-}
-
-button {
-  font: inherit;
-  border: 1px solid #0076bb;
-  background-color: #0076bb;
-  color: white;
-  cursor: pointer;
-  padding: 0.75rem 2rem;
-  border-radius: 30px;
-}
-
-button:hover,
-button:active {
-  border-color: #002350;
-  background-color: #002350;
-}
-
-select {
-  width: auto;
-}
-
-input[type='checkbox'],
-input[type='radio'] {
-  display: inline-block;
-  width: auto;
-  margin-right: 1rem;
-}
-
-input[type='checkbox'] + label,
-input[type='radio'] + label {
-  font-weight: normal;
-}*/
 </style>

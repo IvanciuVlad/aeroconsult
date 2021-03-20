@@ -26,6 +26,8 @@ export default {
         if (mode === 'signup') {
             url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
         }
+
+        console.log("in auth")
         const response = await fetch(url, {
             method: 'POST',
             body: JSON.stringify({
@@ -35,11 +37,12 @@ export default {
             })
         });
 
+        console.log("Am primit response in auth");
         const responseData = await response.json();
 
         if (!response.ok) {
             throw new Error(
-                responseData.message || 'Failed to authenticate. Check your login data.'
+                responseData.message + " in auth" || 'Failed to authenticate. Check your login data.'
             );
         }
 
@@ -67,7 +70,11 @@ export default {
             lastName: payload.lastName,
             faculty: payload.faculty,
             studyYear: payload.studyYear,
+            appliedTo: {},
+            noOfApps: 0
         }
+
+        console.log(userData);
 
         const token = context.rootGetters.token;
 
@@ -81,14 +88,8 @@ export default {
         );
 
         if (!response.ok) {
-            throw new Error('Failed to authenticate. Check your login data.');
+            throw new Error('Failed to authenticate.');
         }
-    },
-
-    async uploadCV(context, payload) {
-        const userId = context.rootGetters.userId;
-
-        firebase.storage().ref('CV/' + userId + '.pdf').put(payload.file)
     },
 
     async sendContactForm(context, payload) {
@@ -114,6 +115,83 @@ export default {
         if (!response.ok) {
             throw new Error('Failed to send contact form.');
         }
+    },
+
+    async sendApplication(context) {
+        const userId = context.rootGetters.userId;
+        const token = context.rootGetters.token;
+
+        const appliedTo = context.rootGetters.appliedTo;
+
+        console.log(appliedTo);
+
+        const response = await fetch(
+            `https://aeroconsult2021-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/appliedTo.json?auth=` + token,
+            {
+                method: 'PUT',
+                body: JSON.stringify(appliedTo)
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error('Failed to send application.');
+        }
+
+        // await this.updateNoOfApps(context);
+        await context.dispatch('updateNoOfApps');
+    },
+
+    async updateNoOfApps(context){
+        const userId = context.rootGetters.userId;
+        const token = context.rootGetters.token;
+
+        context.commit('incrementNoOfApps');
+
+        console.log(context.state.noOfApps);
+
+        const response = await fetch(
+            `https://aeroconsult2021-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/noOfApps.json?auth=` + token,
+            {
+                method: 'PUT',
+                body: JSON.stringify(context.state.noOfApps)
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error('Failed to do something.');
+        }
+    },
+
+    async loadApplications(context) {
+        const userId = context.rootGetters.userId;
+        const token = context.rootGetters.token;
+        console.log(" in load applications")
+        const response = await fetch(`https://aeroconsult2021-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}.json?auth=` + token)
+
+        const responseData = response.json();
+        console.log("avem response data");
+
+        if (!response.ok) {
+            throw new Error(responseData.message || 'Failed to fetch!');
+        }
+
+        const apps = [];
+
+        const noOfApps = responseData.noOfApps;
+        for (let i = 0; i < noOfApps; i++) {
+            apps.push(responseData.appliedTo[i]);
+        }
+
+        console.log("In loadApplication: " + noOfApps + " apps " + apps);
+
+        context.commit('setNoOfApps', noOfApps);
+        context.commit('setApplications', apps);
+    },
+
+    async uploadCV(context, payload) {
+        const userId = context.rootGetters.userId;
+
+        firebase.storage().ref('CV/' + userId + '.pdf').put(payload.file)
     },
 
     tryLogin(context) {

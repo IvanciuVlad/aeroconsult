@@ -14,45 +14,51 @@
       <div class="col-12">
         <div class="card mb-4">
           <div class="card-body">
+
             <h4 class="card-title">
 
             </h4>
 
             <div class="card-text row">
-              <a href="#" class="col-4 col-md-4 pl-1 pl-md-4 pr-1 pr-md-4 landing-logo-container"
+              <!-- GMV -->
+              <router-link to="/gmv" class="col-4 col-md-4 pl-1 pl-md-4 pr-1 pr-md-4 landing-logo-container"
                  data-toggle="modal" data-target="#company-14">
                 <div class="col-12 m-auto landing-logo container-logo-companie">
                   <img src="../../assets/gmv.png" class="logo-companie" />
                 </div>
-              </a>
+              </router-link>
 
-              <a href="#" class="col-4 col-md-4 pl-1 pl-md-4 pr-1 pr-md-4 landing-logo-container"
+              <!-- GKN/Fokker -->
+              <router-link to="/fokker" class="col-4 col-md-4 pl-1 pl-md-4 pr-1 pr-md-4 landing-logo-container"
                  data-toggle="modal" data-target="#company-15">
                 <div class="col-12 m-auto landing-logo container-logo-companie">
                   <img src="../../assets/GKN.jpg"  class="logo-companie" />
                 </div>
-              </a>
+              </router-link>
 
-              <a href="#" class="col-4 col-md-4 pl-1 pl-md-4 pr-1 pr-md-4 landing-logo-container"
+              <!-- HPS -->
+              <router-link to="/hps" class="col-4 col-md-4 pl-1 pl-md-4 pr-1 pr-md-4 landing-logo-container"
                  data-toggle="modal" data-target="#company-16">
                 <div class="col-12 m-auto landing-logo container-logo-companie">
                   <img src="../../assets/HPS_Logo_RO_300dpi_QF_Farbig.jpg"  class="logo-companie"/>
                 </div>
-              </a>
+              </router-link>
 
-              <a href="#" class="col-4 col-md-4 pl-1 pl-md-4 pr-1 pr-md-4 landing-logo-container"
+              <!-- TAROM -->
+              <router-link to="/tarom" class="col-4 col-md-4 pl-1 pl-md-4 pr-1 pr-md-4 landing-logo-container"
                  data-toggle="modal" data-target="#company-23">
                 <div class="col-12 m-auto landing-logo container-logo-companie">
                   <img src="../../assets/tarom-logo.jpg"  class="logo-companie"/>
                 </div>
-              </a>
+              </router-link>
 
-              <a href="#" class="col-4 col-md-4 pl-1 pl-md-4 pr-1 pr-md-4 landing-logo-container"
+              <!-- UAC -->
+              <router-link to="/uac" class="col-4 col-md-4 pl-1 pl-md-4 pr-1 pr-md-4 landing-logo-container"
                  data-toggle="modal" data-target="#company-19">
                 <div class="col-12 m-auto landing-logo container-logo-companie">
                   <img src="../../assets/UniversalAlloy-«_Logo_RGB_SML.jpg"  class="logo-companie"/>
                 </div>
-              </a>
+              </router-link>
 
               <!-- Euroavia -->
               <router-link to="/euroavia" class="col-4 col-md-4 pl-1 pl-md-4 pr-1 pr-md-4 landing-logo-container"
@@ -63,29 +69,44 @@
               </router-link>
 
               <!-- Deimos -->
-              <a href="#" class="col-4 col-md-4 pl-1 pl-md-4 pr-1 pr-md-4 landing-logo-container"
+              <router-link to="/deimos" class="col-4 col-md-4 pl-1 pl-md-4 pr-1 pr-md-4 landing-logo-container"
                  data-toggle="modal" data-target="#company-21">
                 <div class="col-12 d-inline-block m-auto landing-logo">
                   <img src="../../assets/LogoDeimos.png"  class="logo-companie" />
                 </div>
-              </a>
+              </router-link>
 
               <!-- SAB -->
-              <a href="#" class="col-4 col-md-4 pl-1 pl-md-4 pr-1 pr-md-4 landing-logo-container"
+              <router-link to="/sab" class="col-4 col-md-4 pl-1 pl-md-4 pr-1 pr-md-4 landing-logo-container"
                  data-toggle="modal" data-target="#company-20">
                 <div class="col-12 m-auto landing-logo container-logo-companie">
                   <img src="../../assets/SABAerospaceBaner.gif"  class="logo-companie" />
                 </div>
-              </a>
+              </router-link>
 
-              <a href="#" class="col-4 col-md-4 pl-1 pl-md-4 pr-1 pr-md-4 landing-logo-container"
+              <!-- Romaero -->
+              <router-link to="/romaero" class="col-4 col-md-4 pl-1 pl-md-4 pr-1 pr-md-4 landing-logo-container"
                  data-toggle="modal" data-target="#company-17">
                 <div class="col-12 m-auto landing-logo container-logo-companie">
                      <img src="../../assets/rom.png"  class="logo-companie" />
                      </div>
-              </a>
+              </router-link>
 
+              <!-- INCAS -->
+              <router-link to="/incas" class="col-6 col-md-6 pl-1 pl-md-4 pr-1 pr-md-4 landing-logo-container"
+                           data-toggle="modal" data-target="#company-20">
+                <div class="col-12 m-auto landing-logo container-logo-companie">
+                  <img src="../../assets/incas.png"  class="logo-companie" />
+                </div>
+              </router-link>
 
+              <!-- COMOTI -->
+              <router-link to="/comoti" class="col-6 col-md-6 pl-1 pl-md-4 pr-1 pr-md-4 landing-logo-container"
+                           data-toggle="modal" data-target="#company-17">
+                <div class="col-12 m-auto landing-logo container-logo-companie">
+                  <img src="../../assets/comoti.png"  class="logo-companie" />
+                </div>
+              </router-link>
             </div>
 
           </div>
