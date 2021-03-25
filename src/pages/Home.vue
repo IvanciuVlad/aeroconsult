@@ -17,25 +17,25 @@
 
               <li class="nav-item active">
                 <router-link to="/" class="nav-link">
-                  Acasă
+                  Home
                 </router-link>
               </li>
 
               <li class="nav-item">
                 <router-link to="/contact" class="nav-link">
-                  Contactează-ne
+                  Contact Us
                 </router-link>
               </li>
 
               <li class="nav-item">
                 <router-link to="/conference" class="nav-link">
-                  Conferința live
+                  LIVE Stream
                 </router-link>
               </li>
 
               <li class="nav-item">
                 <router-link to="/companies" class="nav-link">
-                  Companii participante
+                  Companies
                 </router-link>
               </li>
 
@@ -57,7 +57,7 @@
       <!-- Inner Wrapper -->
       <div class="inner-wrapper mt-auto mb-auto container">
         <div class="video-container">
-          <video width="320" height="240" controls class="video-background" autoplay muted loop>
+          <video width="320" height="240" controls  autoplay muted loop class="video-background">
             <source src="@/assets/ACINFOFinal.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
@@ -66,16 +66,26 @@
           <div class="col-lg-5 col-md-5 col-sm-12 mt-auto mb-auto mr-3">
             <h1 class="welcome-heading display-4 text-white">
               #internships
-              22-23 martie
+              22-28 martie
             </h1>
             <h5 class="text-muted">
               Găsește oportunitățile potrivite pentru realizarea stagiului de practică
               obligatorie din vara aceasta.
             </h5>
-            <a href="https://ro-ro.facebook.com/EUROAVIABucuresti/"
+            <button 
                class="btn btn-lg btn-primary btn-pill align-self-center" target="_blank">
-              <fa :icon="['fab', 'facebook']" />   Găsește-ne pe Facebook
-            </a>
+              <a class="text-white" target="_blank"
+                 href="https://firebasestorage.googleapis.com/v0/b/aeroconsult2021.appspot.com/o/Brosuri%2FInfografic_aeroconsult2021.pdf?alt=media"
+                 download="InfograficAeroconsult2021.pdf">
+                <fa :icon="['fas', 'download']"/>
+                programul evenimentului
+              </a>
+            </button>
+             <button 
+               class="btn btn-lg btn-success btn-pill align-self-center" target="_blank" style="margin-top:10px;">
+              <a class="text-white" target="_blank"
+                 href="https://forms.gle/TfVuASoNLGHQBbsk9">Înregistrare ALUMNI TALK</a>
+            </button>
           </div>
 
           <div class="col-lg-4 col-md-5 col-sm-12 ml-auto">
@@ -105,9 +115,8 @@
                 <div class="icon text-black mr-5" style="background: #E0CA3C"><i class="fa icon-number"><b>1</b></i>
                 </div>
                 <div>
-                  <h5 class="text-light">Intră pe www.aeroconsult.info
-                  </h5>
-                  <p>Crează cont și încarcă CV-ul</p>
+                  <h5 class="text-light">Creează cont și încarcă CV-ul</h5>
+                  <p></p>
                 </div>
               </div>
 
@@ -117,8 +126,7 @@
                 <div>
                   <h5 class="text-light">Urmărește prezentările companiilor și alege oportunitățile potrivite
                   </h5>
-                  <p>Găsește compania cea mai potrivită pentru efectuarea stagiului de practică obligatorie
-                    din perioada 25 mai - 25 septembrie.
+                  <p>Găsește compania cea mai potrivită pentru efectuarea stagiului de practică obligatorie.
                   </p>
                 </div>
               </div>
@@ -127,10 +135,9 @@
                 <div class="icon text-black mr-5" style="background: #E0CA3C"><i class="fa icon-number"><b>3</b></i>
                 </div>
                 <div>
-                  <h5 class="text-light">Aplică
+                  <h5 class="text-light">Aplică direct de pe pagina companiei
                   </h5>
-                  <p>Direct de pe pagina companiei sau urmarește indicațiile menționate în dreptul fiecărei companii pentru a aplica la o
-                    poziție de practică.</p>
+                  <p> </p>
                 </div>
               </div>
 
@@ -138,25 +145,13 @@
                 <div class="icon text-black mr-5" style="background: #E0CA3C"><i class="fa icon-number"><b>4</b></i>
                 </div>
                 <div>
-                  <h5 class="text-light">Urmează procesul de selectie
+                  <h5 class="text-light">Urmează procesul de selecție
                   </h5>
                   <p>Aplicarea pentru un post de practică va fi urmată de un proces de selecție realizat de
                     reprezentanții fiecărei companii în parte.
                   </p>
                 </div>
               </div>
-
-              <div class="feature py-4 d-flex">
-                <div class="icon text-black mr-5" style="background: #E0CA3C"><i class="fa icon-number"><b>5</b></i>
-                </div>
-                <div>
-                  <h5 class="text-light">Completează convenția cadru
-                  </h5>
-                  <p>Alături de reprezentanții companiilor, completează și semnează convenția cadru (Descarcă
-                    de pe Moodle) pentru realizarea unui stagiu de 180 de ore în această vară.</p>
-                </div>
-              </div>
-
             </div>
           </div>
         </div>
@@ -165,34 +160,46 @@
     <!-- / Guide Section -->
 
     <!-- Organizers Section -->
-    <div class="testimonials section bg-light py-4" id="organizers_section">
-      <h3 class="section-title text-center m-5">Parteneri</h3>
 
-      <div class="container py-5">
+    <!-- TAROM -->
+   <div class="testimonials section bg-light py-4" id="organizers_section">
+      <h3 class="section-title text-center m-5">Partener Tehnic</h3>
+      <div class="container">
         <div class="row">
-          <div class="col-md-6 testimonial text-center">
-            <a href="https://euroavia-bucuresti.ro/" target="_blank">
-              <div class="avatar rounded-circle with-shadows mb-3 ml-auto mr-auto">
-                <img src="@/assets/logo_targ_wh.png" class="w-100" alt="Testimonial Avatar"/>
-              </div>
-            </a>
-            <h5 class="mb-1">EUROAVIA București</h5>
-            <span class="text-muted d-block mb-2">The European Assiociation of Aerospace Students</span>
-          </div>
-
-
-          <div class="col-md-6 testimonial text-center">
-            <a href="http://www.upb.ro/" target="_blank">
-              <div class="avatar rounded-circle with-shadows mb-3 ml-auto mr-auto">
-                <img src="@/assets/logo-upb.png" class="w-100" alt="Testimonial Avatar"/>
-              </div>
-            </a>
-            <h5 class="mb-1">UPB</h5>
-            <span class="text-muted d-block mb-2">Universitatea POLITEHNICA din București</span>
+          <div class="col-md-9" >
+            <div id="tarom-card" class="col-md-11 offset-md-2" >
+                <div  class="card card border-0" >
+                  <div class="card-body"  >
+                    <a href="https://tarom.esky.ro/">
+                      <img src="@/assets/tarom-logo.jpg" class="img-fluid" alt="Responsive image" style="width:90%; padding-left:5px;">
+                    </a>
+                  </div>
+                </div>
+            </div>
           </div>
         </div>
-      </div>
     </div>
+    <!-- GMV -->
+   <div class="testimonials section bg-light py-4" id="organizers_section">
+      <h3 class="section-title text-center m-5">Sponsor GOLD</h3>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9" >
+            <div  id="gmv-card" class="col-md-11 offset-md-2"  >
+                <div  class="card card border-0">
+                  <div class="card-body" >
+                    <a href="https://www.gmv.com/en/">
+                      <img id="gmv-img" src="@/assets/gmv.png" class="img-fluid" alt="Responsive image" style="">
+                    </a>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+   </div>
+    </div> 
     <!-- / Organizers Section -->
   </div>
 </template>
@@ -231,4 +238,28 @@ export default {
 .imag-logo {
   width: 75px;
 }
+img:hover{
+   transform: scale(1.1);
+}
+
+@media only screen and (min-width: 768px) {
+  #gmv-img{
+    height:160px;
+    padding-left:100px; 
+  }
+  #gmv-card{
+    margin-left:180px;
+  }
+  #tarom-card{
+    margin-left:180px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #gmv-img{
+    height:60px;
+    padding-left:50px; 
+  }
+}
+
 </style>

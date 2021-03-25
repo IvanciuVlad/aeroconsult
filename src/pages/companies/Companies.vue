@@ -70,7 +70,7 @@
 
               <!-- Deimos -->
               <router-link to="/deimos" class="col-4 col-md-4 pl-1 pl-md-4 pr-1 pr-md-4 landing-logo-container"
-                 data-toggle="modal" data-target="#company-21">
+                 data-toggle="modal" data-target="#company-21" style="padding-top:40px;">
                 <div class="col-12 d-inline-block m-auto landing-logo">
                   <img src="../../assets/LogoDeimos.png"  class="logo-companie" />
                 </div>

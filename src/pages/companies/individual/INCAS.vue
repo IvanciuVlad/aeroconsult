@@ -44,7 +44,7 @@
             <br>
             <b>E-mail: </b> incas@incas.ro
             <br>
-            <a href="https://www.incas.ro" style="color:#1374A5;"><b>www.incas.ro</b></a>
+           
           </p>
 
           <div class="text-center" v-if="haveAuth">

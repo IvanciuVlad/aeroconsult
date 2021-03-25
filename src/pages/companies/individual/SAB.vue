@@ -1,11 +1,11 @@
 <template>
   <div>
     <the-header></the-header>
-
+    <img src="../../../assets/SABAerospaceBaner.gif" style="width:100%;" class="img-fluid" alt="SAB banner">
     <div class="blog section section-invert py-4 vh-10000 text-black" style="background: whitesmoke">
 
       <div class="container">
-        <img src="../../../assets/SABAerospaceBaner.gif" style="width:100%;" class="img-fluid" alt="SAB banner">
+        
       </div>
 
       <div class="container">

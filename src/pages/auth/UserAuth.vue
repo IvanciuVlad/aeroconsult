@@ -59,7 +59,7 @@
 
         <!-- Signup mode -->
         <div v-if="mode === 'signup'" class="text-black">
-          <form @submit.prevent="submitForm">
+          <form @submit.prevent="submitForm" autocomplete="off">
             <div class="form-group">
               <label for="email">Adresă Email</label>
               <div class="input-group mb-3">

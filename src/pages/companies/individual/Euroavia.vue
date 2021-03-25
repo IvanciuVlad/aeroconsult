@@ -2,7 +2,7 @@
   <div>
     <the-header></the-header>
 
-    <div class="blog section section-invert py-4 vh-100 text-black" style="background: whitesmoke">
+    <div class="blog section section-invert py-4 vh-10000 text-black" style="background: whitesmoke">
       <div class="container">
 
         <div>

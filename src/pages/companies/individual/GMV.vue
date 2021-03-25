@@ -1,7 +1,7 @@
 <template>
   <div>
     <the-header></the-header>
-
+    <img src="../../../assets/banner_gmv_cropped.png" style="width:100%;" class="img-fluid" alt="SAB banner">
     <div class="blog section section-invert py-4 vh-100000 text-black" style="background: whitesmoke">
       <div class="container">
 
@@ -13,7 +13,7 @@
 
         <div>
           <h5 class="lead" style="font-weight: bold; color:#c00000;">
-            Description
+            DESCRIPTION
           </h5>
           <p class="text-justify">
             In GMV we believe that behind every new need, behind every new problem, lies a challenge and a chance to
@@ -39,7 +39,7 @@
 
         <div>
           <h5 class="lead" style="font-weight: bold; color:#c00000;">
-            Who are we?
+            WHO ARE WE?
           </h5>
           <p class="text-justify">
             GMV is a private-capital Spanish technological business group trading on a worldwide scale. Founded in 1984
@@ -73,7 +73,7 @@
 
         <div>
           <h5 class="lead" style="font-weight: bold; color:#c00000;">
-            Our Values
+            OUR VALUES
           </h5>
           <h6>INNOVATION CAPABILITY </h6>
 
@@ -88,11 +88,11 @@
           <p class="text-justify">
             We are leaders on attending specific needs andsegments with the highest technology.
           </p>
-          <h6>Quality </h6>
+          <h6>QUALITY </h6>
           <p class="text-justify">
             We have a total commitment to quality.
           </p>
-          <h6>Response capability </h6>
+          <h6>RESPONSE CAPABILITY </h6>
           <p class="text-justify">
             The customer knows what you need and we know how to provide it through experience and technological
             expertise.CUSTOMER FOCUS
@@ -208,5 +208,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped >
+
+
 </style>

@@ -27,11 +27,7 @@
             series of electrical centrifugal natural gas or air compressors and electrical centrifugal air blowers in a
             large variety of flows and pressures, making COMOTI the only national producer for such complex equipment.
           </p>
-          <p class="text-justify">
-            In more than 15 years of activities, SAB has been involved in several projects facing the mechanical design,
-            thermal and structural analyses of space systems and subsystems, the high precision mechanical integration
-            activities, testing activities, and the manufacturing of space mechanical parts and MGSE.
-          </p>
+         
           <p>COMOTI's researchers, allowed involvement in present days with scientific research, design, testing and
             small production in main research fields:</p>
           <ul type="1">

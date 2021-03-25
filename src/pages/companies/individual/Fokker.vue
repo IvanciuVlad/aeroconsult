@@ -16,13 +16,12 @@
             DESCRIERE
           </h5>
           <p class="text-justify">
-            GKN Aerospace este liderul aerospațial de nivel 1 din lume în multi-tehnologie în materie de furnizori. Cu peste 50 de locații de producție de pe glob, GKN servește peste 90% din producătorii mondiali de aeronave și motoare. Proiectăm și fabricarea de sisteme și componente aerospațiale inteligente inovatoare. Tehnologiile noastre sunt utilizate în aeronave care variază de la cele mai utilizate avioane cu un singur culoar și cele mai mari avioane de pasageri din lume la jeturi de afaceri și generația a 5-a de avioane de vânătoare. Lucrând strâns împreună cu universitățile, instituții cunoscute, furnizori și clienți, conducem industria în dezvoltarea de noi
-            tehnologiic pentru îmbunătățirea eficienței aeronavelor: scăderea costurilor, a greutății și a emisiilor.
+           GKN Aerospace is the world’s leading multi-technology tier 1 aerospace supplier. With over 50 manufacturing locations across the globe, GKN serves over 90% of the world’s aircraft and engine manufacturers. We design and manufacture innovative smart aerospace systems and components. Our technologies are used in aircraft ranging from the most used single aisle aircraft and the largest passenger planes in the world to business jets and 5th generation fighter aircrafts. Working closely together with universities, knowledge institutes, suppliers and customers, we lead the industry in developing new technology to improve aircraft efficiency: lowering cost, weight and emissions.
+        
           </p>
 
           <p class="text-justify">
-            Biroul nostru GKN Fokker din România este unul dintre marile companii aeriene
-            Hub-uri de inginerie pentru companie, care sprijină activitatea în toate provocările ingineriei. Echipa noastră pricepută se ocupă de design-ul avioanelor și de ciclul de viață al dezvoltării de la propunere la concept, de la asistența producerii la asistență în zbor.Indiferent dacă proiectăm o coadă compozită pentru cel mai nou Gulfstream Business Jet sau dacă oferim asistență producției noastre în locațiile din toată Europa, suntem pasionați de munca noastră și ne arătăm iubirea pentru Ingineria Aerospațială prin tot ceea ce facem.
+           Our GKN Fokker office in Romania is one of the major Aerospace Engineering Hubs for the company, supporting the business in all engineering challenges. Our high skilled engineering team serves the complete Aircraft Design & Development Life Cycle from Proposal to Concept, from Production Assistance to In-Flight Support. Whether we are designing a composite tail for the newest Gulfstream Business Jet or providing onsite support to our production locations all over Europe, we are passionate about our work and show our love for Aerospace Engineering through everything we do.
 
           </p>
         </div>
@@ -33,7 +32,7 @@
           </h5>
 
           <p class="text-justify">
-            Tom Leene
+            Nicolae Raicu
             <br>
             Director
           </p>

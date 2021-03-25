@@ -1,10 +1,11 @@
 <template>
   <div>
     <the-header></the-header>
-
+     <img src="../../../assets/HPS_banner_cropped.png" class="img-fluid" alt="HPS banner">
     <div class="blog section section-invert py-4 vh-10000 text-black" style="background: whitesmoke">
+     
       <div class="container">
-        <img src="../../../assets/HPS_banner_cropped.png" class="img-fluid" alt="HPS banner">
+        
       </div>
 
       <div class="container">

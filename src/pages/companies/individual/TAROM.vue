@@ -1,8 +1,8 @@
 <template>
   <div>
     <the-header></the-header>
-
-    <div class="blog section section-invert py-4 vh-100 text-black" style="background: whitesmoke">
+    <img src="../../../assets/Tarom_banner.png" style="width:100%;" class="img-fluid" alt="SAB banner">
+    <div class="blog section section-invert py-4 vh-1000 text-black" style="background: whitesmoke">
       <div class="container">
 
         <div>
@@ -45,9 +45,13 @@
 
 
           <p class="text-justify">
-            <b> Telefon: </b>0213 160 220
-            <br>
-            <b>E-mail: </b> agsplai@tarom.ro
+            <b> Telefon: </b>
+            <ul>
+              <li>(004) 021 9978</li>
+              <li>(004) 0800 500 131 (TelVerde)</li>
+              <li>(004) 0371 529 000</li>
+            </ul>
+            <b>E-mail: </b> secrgen@tarom.ro
           </p>
 
           <div class="text-center" v-if="haveAuth">

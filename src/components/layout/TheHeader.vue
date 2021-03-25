@@ -16,25 +16,25 @@
 
           <li class="nav-item active">
             <router-link to="/" class="nav-link">
-              Acasă
+              Home
             </router-link>
           </li>
 
           <li class="nav-item">
             <router-link to="/contact" class="nav-link">
-              Contactează-ne
+              Contact Us
             </router-link>
           </li>
 
           <li class="nav-item">
             <router-link to="/conference" class="nav-link">
-              Conferința live
+              LIVE Stream
             </router-link>
           </li>
 
           <li class="nav-item">
             <router-link to="/companies" class="nav-link">
-              Companii participante
+              Companies
             </router-link>
           </li>
 
